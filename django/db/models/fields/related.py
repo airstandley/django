@@ -1108,10 +1108,10 @@ def create_many_related_manager(superclass, rel):
 
                     # Add the ones that aren't there already
                     self.through._default_manager.using(db).bulk_create([
-                        self.through(**dict(through_defaults), **{
+                        self.through(**dict(through_defaults, **{
                             '%s_id' % source_field_name: self.related_val[0],
                             '%s_id' % target_field_name: obj_id,
-                        })
+                        }))
                         for obj_id in new_ids
                     ])
 
